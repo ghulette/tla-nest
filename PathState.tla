@@ -5,11 +5,6 @@ VARIABLES st, msg, ready, input
 St == {"A0", "A1", "A2", "A_End", "B", "C"}
 Msg == {"a", "b", "c"}
 
-SimMap(x) ==
-  CASE x \in {"A0", "A1", "A2", "A_End"} -> "A"
-    [] x = "B" -> "B"
-    [] x = "C" -> "C"
-
 TypeInv ==
   /\ st \in St
   /\ msg \in Msg \union {"NULL"}
@@ -35,15 +30,19 @@ Next ==
   \/ st = "C" /\ UNCHANGED <<st, msg>>
 
 Env ==
-    /\ ready' \in BOOLEAN
-    /\ input' \in Msg
+  /\ ready' \in BOOLEAN
+  /\ input' \in Msg
 
 Spec == Init /\ [][Next /\ Env]_<<st, msg, ready, input>>
 
 -----------------------------------------------------------------------------
-(* Refinement *)
 
-State == INSTANCE State WITH st <- SimMap(st)
+SimMap(x) ==
+  CASE x \in {"A0", "A1", "A2", "A_End"} -> "A"
+    [] x = "B" -> "B"
+    [] x = "C" -> "C"
+
+State == INSTANCE State WITH st <- SimMap(st), msg <- msg
 
 Refines == State!Spec
 
