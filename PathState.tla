@@ -17,17 +17,17 @@ Init ==
   /\ TypeInv
 
 Next ==
-  \/ st = "A0" /\ ready /\ st' = "A1" /\ UNCHANGED msg
-  \/ st = "A0" /\ ~ready /\ st' = "A2" /\ UNCHANGED msg
-  \/ st = "A1" /\ input = "b" /\ st' = "A_End" /\ msg' = "b"
-  \/ st = "A1" /\ input = "c" /\ st' = "A_End" /\ msg' = "c"
-  \/ st = "A1" /\ input \notin {"b", "c"} /\ st' = "A2" /\ UNCHANGED msg
-  \/ st = "A2" /\ st' = "A_End" /\ msg' = "a"
-  \/ st = "A_End" /\ msg = "a" /\ st' = "A0" /\ msg' = "NULL"
-  \/ st = "A_End" /\ msg = "b" /\ st' = "B" /\ msg' = "NULL"
-  \/ st = "A_End" /\ msg = "c" /\ st' = "C" /\ msg' = "NULL"
-  \/ st = "B" /\ UNCHANGED <<st, msg>>
-  \/ st = "C" /\ UNCHANGED <<st, msg>>
+  \/ st = "A0"    /\ ready                   /\ st' = "A1"    /\ UNCHANGED msg
+  \/ st = "A0"    /\ ~ready                  /\ st' = "A2"    /\ UNCHANGED msg
+  \/ st = "A1"    /\ input = "b"             /\ st' = "A_End" /\ msg' = "b"
+  \/ st = "A1"    /\ input = "c"             /\ st' = "A_End" /\ msg' = "c"
+  \/ st = "A1"    /\ input \notin {"b", "c"} /\ st' = "A2"    /\ UNCHANGED msg
+  \/ st = "A2"                               /\ st' = "A_End" /\ msg' = "a"
+  \/ st = "A_End" /\ msg = "a"               /\ st' = "A0"    /\ msg' = "NULL"
+  \/ st = "A_End" /\ msg = "b"               /\ st' = "B"     /\ msg' = "NULL"
+  \/ st = "A_End" /\ msg = "c"               /\ st' = "C"     /\ msg' = "NULL"
+  \/ st = "B"                                /\ UNCHANGED <<st, msg>>
+  \/ st = "C"                                /\ UNCHANGED <<st, msg>>
 
 Env ==
   /\ ready' \in BOOLEAN

@@ -14,12 +14,12 @@ Init ==
   /\ msg \in Msg
 
 Next ==
-  \/ st = "A" /\ msg = "a" /\ st' = "A"
-  \/ st = "A" /\ msg = "b" /\ st' = "B"
-  \/ st = "A" /\ msg = "c" /\ st' = "C"
+  \/ st = "A" /\ msg = "a"    /\ st' = "A"
+  \/ st = "A" /\ msg = "b"    /\ st' = "B"
+  \/ st = "A" /\ msg = "c"    /\ st' = "C"
   \/ st = "A" /\ msg = "NULL" /\ UNCHANGED st
-  \/ st = "B" /\ UNCHANGED st
-  \/ st = "C" /\ UNCHANGED st
+  \/ st = "B"                 /\ UNCHANGED st
+  \/ st = "C"                 /\ UNCHANGED st
 
 Env == msg' \in Msg
 
